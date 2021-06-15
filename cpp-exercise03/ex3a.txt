@@ -1,0 +1,33 @@
+/*ex3a
+ * =============================================================
+ * Written by: Avi Toohband, id: 203341854, Login: avito
+ */
+//---------------------------
+#include <iostream>
+//---------------------------
+using std::cout;
+using std::cin;
+using std::endl;
+//---------------------------
+int main()
+{
+    int num =0,   // input variable
+        sum =0, // to sum all of the values
+        positive =0, negative =0 ,counter =0;   // counters
+
+    cin >> num;
+
+    while (num != 0)
+    {
+        counter++;
+        if (num > 0) positive++;
+        else negative ++;
+        sum += num;
+        cin >> num;
+
+    }
+
+    cout << counter << " " << sum/counter << " " << positive << " " << negative << endl;
+        return 0;
+}
+//---------------------------

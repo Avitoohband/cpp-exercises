@@ -1,0 +1,453 @@
+/*ex8a
+ * =============================================================
+ * Written by: Avi Toohband, id: 203341854, Login: avito
+   this program is builded on a case situation,
+   all around one array and actions on it that the user is picking
+   by his free will.
+   in-depth information and examples will be included in the REAMDE file.
+*/
+//---Include Section----------
+#include <iostream>
+#include <cstdlib>
+//---Using Section------------
+using std::cout;
+using std::cerr;
+using std::cin;
+using std::endl;
+//---Const and Enums----------
+const int N = 10; // to max size of the array.
+
+enum choose_t{ONE_C,TWO_C,THR_C,FOR_C,FIVE_C,SIX_C,SEV_C,EIGH_C,
+              NINE_N,TEN_C,ELEV_C,TWEL_C};
+
+//--- Global Variables--------
+
+bool sorted = false; // to know if the array is already sorted or not.
+bool is_pal = false; // to know if the array is palindrome.
+
+//---Functions Declarations---
+void pick_function( int arr[]);
+void initiate_array(int arr[], int i );
+void get_in_array(int arr[] ,int i );
+int search_val(int arr[],int i,const int val);
+void b_sort_rec1(int arr[] ,int i,int round);
+void b_sort_rec2(int arr[] ,int i,int round);
+int bin_search(int arr[] ,int lo ,int hi, int val);
+void val_occurency(int arr[],int i,int val ,int &counter);
+void display(int arr[],int i, int k);
+void display_inverted(int arr[], int i );
+bool check_monotony(int arr[],int i);
+bool check_pal(int arr[], int i, int k);
+void eq_to_left(int arr[], int i, int sum, int &counter);
+void cpy_array(int arr[],int cpy[],int i,int k, int counter, int &sum);
+void check_prime(int arr[], int i);
+bool divide_prime(int num, int i);
+//---Main Function------------
+
+int main()
+{
+    int ex_array[N]; // array to storage the values.
+
+    initiate_array(ex_array , 0);
+    pick_function(ex_array);
+
+    return EXIT_SUCCESS;
+}
+
+//---Function Sections--------
+//let the user to select a function.
+void pick_function( int arr[])
+{
+    choose_t num; // for the switch cases.
+    int cpy[N],   // array for copying values to it.
+        pick,     // to pick what function to use
+        val,      //  what val to look for in the array.
+        counter = 0, // to count values.
+        sum = 0 ; // to calculate sum of some values.
+
+
+
+    cin >> pick;
+    num = (choose_t)(pick-1);
+
+
+    if (num == 13)
+   		;
+    else
+        {
+            switch(num)
+            {
+            case ONE_C : {get_in_array(arr, 0);
+                          sorted = false;
+                          pick_function(arr);
+                          break;}
+            case TWO_C : {cin >> val;
+                          cout << search_val(arr,0,val) << endl;
+                          pick_function(arr);
+                          break;}
+            case THR_C : {b_sort_rec1(arr, 0 , 0);
+                          sorted = true;
+                          pick_function(arr);
+                          break;}
+            case FOR_C : {if(sorted){
+                                cin >> val;
+                                if (bin_search(arr, 0, (N-1), val) != 0)
+                                    cout << "1\n";
+                                else
+                                        cout << "0\n";
+                                    }
+                          else
+                          {
+                              cerr << "Error\n";
+                          }
+                          pick_function(arr);
+                          break;}
+            case FIVE_C :{counter = 0;
+                           cin >> val;
+                           val_occurency(arr, 0, val , counter);
+                           cout << counter << endl;
+                           pick_function(arr);
+                           break;}
+
+            case SIX_C : {display(arr,0, 0);
+                          pick_function(arr);
+                          break;}
+
+
+
+            case SEV_C : {display_inverted(arr,(N-1));
+                          pick_function(arr);
+                          break;}
+            case EIGH_C :{sorted = check_monotony(arr,0);
+                          if(sorted) cout << "1\n";
+                          else cout <<"0\n";
+                          pick_function(arr);
+                          break;}
+            case NINE_N : {is_pal = check_pal(arr, 0, (N-1));
+                           if(is_pal) cout << "1\n";
+                           else cout << "0\n";
+                           pick_function(arr);
+                           break;}
+            case TEN_C : {counter = 0;
+                          sum = 0;
+                          eq_to_left(arr, 0, sum, counter);
+                          cout << counter << endl;
+                          pick_function(arr);
+                          break;}
+            case ELEV_C : {counter = 0;
+                            initiate_array(cpy,0);
+                            cpy_array(arr, cpy, 0, 0, counter, sum);
+                            display(cpy, 0, sum);
+                            sum = 0;
+                            pick_function(arr);
+                            break;}
+            case TWEL_C : {check_prime(arr, 0);
+                           pick_function(arr);
+                           break;}        }
+
+}
+}
+//----------------------------
+//initiate all the array's cells to be zero.
+void initiate_array(int arr[], int i)
+{
+
+
+    if (i == (N-1))
+        arr[i] = 0;
+
+    else if(i < (N-1))
+    {
+        arr[i] = 0;
+        initiate_array(arr,(i+1));
+    }
+
+
+}
+//----------------------------
+//recursive function to get values into the array.
+void get_in_array(int arr[],int i)
+{
+
+
+    if (i == (N-1))
+        cin >> arr[i];
+
+    else if(i < (N-1))
+    {
+        cin >> arr[i];
+        get_in_array(arr,(i+1));
+    }
+
+
+}
+//----------------------------
+//looking for a value inside the array.
+int search_val(int arr[],int i,const int val)
+{
+
+     if(i > (N-1))
+    {
+        return 0;
+    }
+        else if(i <= (N-1))
+    {
+        if(arr[i] == val)
+        {
+            return 1;
+        }
+        else
+        {
+            search_val(arr,(i+1) , val);
+        }
+
+    }
+     return 1;
+}
+//----------------------------
+//stage 1, bubble sort, to rearrange of the array's values order.
+void b_sort_rec1(int arr[] ,int i,int round)
+{
+    if (round == (N-1))
+    {
+        b_sort_rec2(arr, i, round);
+    }
+    else if(round < (N-1))
+    {
+        b_sort_rec2(arr, i, round);
+        b_sort_rec1(arr,i,(round+1));
+    }
+}
+//----------------------------
+//stage 2, bubble sort.
+void b_sort_rec2(int arr[] ,int i,int round)
+{
+    if (i == ((N-1)-round))
+    {
+        if(arr[i] > arr[i+1])
+        {
+            int temp = arr[i];
+            arr[i] = arr[i+1];
+            arr[i+1] = temp;
+        }
+    }
+    else if (i < ((N-1)-round))
+    {
+          if(arr[i] > arr[i+1])
+        {
+            int temp = arr[i];
+            arr[i] = arr[i+1];
+            arr[i+1] = temp;
+        }
+        b_sort_rec2(arr,(i+1),round);
+
+    }
+}
+
+
+//----------------------------
+//binary search in recursive function to find value in the array.
+int bin_search(int arr[] ,int lo ,int hi, int val)
+{
+if (lo > hi)
+    return 0;
+
+int mid = lo +(hi - lo)/2;
+
+if (arr[mid] == val)
+    return mid;
+if (arr[mid] < val)
+    return bin_search(arr, (mid+1), hi, val);
+else
+    return bin_search(arr, lo, (mid-1), val);
+
+}
+//----------------------------
+//find how many times specific value is occurring in the array.
+void val_occurency(int arr[],int i,int val ,int &counter)
+{
+
+    if (i == (N-1))
+    {
+        if (arr[i] == val)
+            counter++;
+    }
+    else
+        {
+            if (arr[i] == val)
+            {
+             counter++;
+             val_occurency(arr, (i+1), val, counter);
+            }
+            else
+                {
+                 val_occurency (arr, (i+1), val ,counter);
+                }
+        }
+}
+//----------------------------
+//print the array's values.
+void display(int arr[],int i, int k)
+{
+    int stop = 0;
+    stop = (N-1);
+    if(k != 0)
+    {
+       stop = (N-1-(N-k));
+    }
+
+    if (i == stop)
+        cout << arr[i] << endl;
+
+    else if(i < stop)
+    {
+        cout << arr[i] << " ";
+        display(arr,(i+1), k);
+    }
+
+
+}
+//----------------------------
+//display the inverted array (from the end to start).
+void display_inverted(int arr[], int i )
+{
+    if(i == 0)
+    {
+        cout << arr[i] << endl;;
+    }
+    else
+        {
+            cout << arr[i] << " ";
+            display_inverted(arr, (i-1));
+        }
+}
+//----------------------------
+//check if values in the array are sorted from the smallest to the highest
+//(from the left to the right).
+bool check_monotony(int arr[],int i)
+{
+    if(i == (N-1))
+    {
+        if(arr[i] <= arr[i+1])
+            return true;
+    }
+    else
+        {
+            if(arr[i] > arr[i+1])
+            return false;
+
+            return check_monotony(arr, (i+1));
+        }
+    return false;
+}
+//----------------------------
+//check if the array is palindrome or not.
+bool check_pal(int arr[], int i, int k)
+{
+    if (i == k)
+        return true;
+
+    if(arr[i] != arr[k])
+       return false;
+
+    if(i < k)
+        {
+            return check_pal(arr, (i+1),(k-1));
+        }
+return true;
+}
+//----------------------------
+//counter the number that are equal to the sum of all the numbers to the
+//left of them.
+void eq_to_left(int arr[], int i, int sum, int &counter)
+{
+    if(i == (N-1))
+    {
+        sum += arr[i-1];
+        if(arr[i] == sum)
+            counter++;
+    }
+    if (i == 0)
+        i++;
+
+    if(i < (N-1))
+    {
+        sum += arr[i-1];
+          if(arr[i] == sum)
+            counter++;
+        eq_to_left(arr, (i+1), sum, counter);
+    }
+}
+//----------------------------
+//check for all the values the appears only once, copy it to another array
+//and display it by the same order as it was initially.
+void cpy_array(int arr[],int cpy[],int i,int k,int counter,int &sum)
+{
+    int val = arr[i];
+    sum = k;
+
+    if (i == (N-1))
+    {
+       val_occurency(arr, 0, val ,counter);
+       if(counter == 1 )
+       {
+           cpy[k] = arr[i];
+           cpy_array(arr,cpy, (i+1), (k+1), 0, sum);
+       }
+       else
+        cpy_array(arr, cpy, (i+1), k, 0, sum);
+    }
+
+    else if (i < (N-1))
+    {
+        val_occurency(arr, 0, val ,counter);
+        if(counter == 1 )
+         {
+           cpy[k] = arr[i];
+           cpy_array(arr,cpy, (i+1), (k+1), 0, sum);
+       }
+       else
+        cpy_array(arr, cpy, (i+1), k, 0, sum);
+
+    }
+}
+//----------------------------
+//check for all the prime numbers and show them by order.
+void check_prime(int arr[], int i)
+{
+    if(i == (N-1))
+    {
+        if(divide_prime(arr[i] ,2 ))
+            cout << arr[i];
+
+        cout << endl;
+
+    }
+    else if(i < (N-1))
+    {
+        if(divide_prime(arr[i], 2) )
+            cout << arr[i] << " ";
+        check_prime(arr, (i+1));
+
+    }
+}
+//----------------------------
+//take certain value and check if prime.
+bool divide_prime(int num, int i)
+{
+    if(i == num)
+    {
+        if(num % i == 0)
+        return true;
+    }
+
+    else if(i < num)
+    {
+        if(num % i == 0)
+            return false;
+
+        return divide_prime(num, (i+1));
+    }
+return false;
+}
+//----------------------------

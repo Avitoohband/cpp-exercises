@@ -1,0 +1,166 @@
+/*ex7c
+ * =============================================================
+ * Written by: Avi Toohband, id: 203341854, Login: avito
+  this program is looking for the highest sequence in thats can be
+  find in both of two string and print it.
+*/
+//---Include Section----------
+#include <iostream>
+#include <cstdlib>
+#include <iomanip>
+#include <cstring>
+//---Using Section------------
+using std::cout;
+using std::cin;
+using std::endl;
+using std::setw;
+//---Const Variables-----------
+const int N = 100;
+//---Functions Declarations---
+void get_in_str(char str[]);
+int find_sequence(char str1[], char str2[]);
+int keep_looking(char str1[],int i, char str2[],int k);
+//---Main Function------------
+int main()
+{
+    char str1[N], // these two string will storage.
+         str2[N]; // the chars.
+
+    get_in_str(str1);
+    get_in_str(str2);
+    cout <<find_sequence(str1, str2) << endl;
+
+
+
+    return EXIT_SUCCESS;
+
+}
+//---Functions Sections-------
+//get chars into the string.
+void get_in_str(char str[])
+{
+    cin >> setw(N) >> str;
+}
+//----------------------------
+//is looking for sequence in both of the strings.
+int find_sequence(char str1[], char str2[])
+{
+    int counter = 0,  // current sequence
+        max_counter = 0;  // longest sequence
+
+    for(int i = 0 ; i < (int)strlen(str1) ; i++)
+    {
+        counter = 0;
+        for(int k = 0 ; k < (int)strlen(str2) ; k++)
+        {
+           if(str1[i]==str2[k])
+           {
+               counter = keep_looking(str1, i, str2, k);
+           }
+        }
+        if (max_counter < counter)
+            max_counter = counter;
+    }
+    return max_counter;
+}
+//----------------------------
+//checking thow long the sequence is
+int keep_looking(char str1[],int i, char str2[],int k)
+{
+    int counter = 1;
+    for(i += 1 , k += 1 ; i < (int)strlen(str1) ||
+                  k < (int)strlen(str2) ; i++, k++)
+    {
+        {
+            if(str1[i] != str2[k])
+               return counter;
+            else
+                counter++;
+
+        }
+    }
+/*ex7c
+ * =============================================================
+ * Written by: Avi Toohband, id: 203341854, Login: avito
+  this program is looking for the highest sequence in thats can be
+  find in both of two string and print it.
+*/
+//---Include Section----------
+#include <iostream>
+#include <cstdlib>
+#include <iomanip>
+#include <cstring>
+//---Using Section------------
+using std::cout;
+using std::cin;
+using std::endl;
+using std::setw;
+//---Const Variables-----------
+const int N = 100;
+//---Functions Declarations---
+void get_in_str(char str[]);
+int find_sequence(char str1[], char str2[]);
+int keep_looking(char str1[],int i, char str2[],int k);
+//---Main Function------------
+int main()
+{
+    char str1[N], // these two string will storage.
+         str2[N]; // the chars.
+
+    get_in_str(str1);
+    get_in_str(str2);
+    cout <<find_sequence(str1, str2) << endl;
+
+
+
+    return EXIT_SUCCESS;
+
+}
+//---Functions Sections-------
+//get chars into the string.
+void get_in_str(char str[])
+{
+    cin >> setw(N) >> str;
+}
+//----------------------------
+//is looking for sequence in both of the strings.
+int find_sequence(char str1[], char str2[])
+{
+    int counter = 0,  // current sequence
+        max_counter = 0;  // longest sequence
+
+    for(int i = 0 ; i < (int)strlen(str1) ; i++)
+    {
+        counter = 0;
+        for(int k = 0 ; k < (int)strlen(str2) ; k++)
+        {
+           if(str1[i]==str2[k])
+           {
+               counter = keep_looking(str1, i, str2, k);
+           }
+        }
+        if (max_counter < counter)
+            max_counter = counter;
+    }
+    return max_counter;
+}
+//----------------------------
+//checking thow long the sequence is
+int keep_looking(char str1[],int i, char str2[],int k)
+{
+    int counter = 1;
+    for(i += 1 , k += 1 ; i < (int)strlen(str1) ||
+                  k < (int)strlen(str2) ; i++, k++)
+    {
+        {
+            if(str1[i] != str2[k])
+               return counter;
+            else
+                counter++;
+
+        }
+    }
+return counter;
+}
+
+}

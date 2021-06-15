@@ -1,0 +1,97 @@
+/*ex5a
+ * =============================================================
+ * Written by: Avi Toohband, id: 203341854, Login: avito
+ this program will get 20 values to 2D_Array, will sum each row and each column, then print the index of which of them
+ with the highest sum.
+*/
+//---Include Section----------
+#include <iostream>
+#include <ctime>
+#include <cstdlib>
+//---Using Section------------
+using std::cout;
+using std::cin;
+using std::endl;
+//---Const Variable-----------
+const int ARRAY_ROWS_SIZE = 4;  // the array rows size.
+const int ARRAY_COLMS_SIZE = 5; //the array columns size.
+//---Main Function------------
+int main()
+{
+    int Zahlen [ARRAY_ROWS_SIZE] [ARRAY_COLMS_SIZE], // array of 20 values (table).
+        max_sum_r = 0,      // to save the row with the highest sum.
+        max_sum_c = 0,      // to save the column with the highest sum.
+        current_sum = 0,    //to save the current sum.
+        i,j;                //indexes
+
+    //get the input.
+    for (i = 0 ; i < ARRAY_ROWS_SIZE ; i++)
+    {
+      for(j = 0 ; j <ARRAY_COLMS_SIZE ; j++)
+        {
+        cin >> Zahlen[i][j];
+        }
+    }
+    // calculate the sum of each row.
+    for(i = 0 ; i < ARRAY_ROWS_SIZE ; i++)
+    {
+
+        current_sum = 0;
+        for(j = 0 ; j < ARRAY_COLMS_SIZE ; j++)
+        {
+            current_sum += Zahlen[i][j];
+        }
+        max_sum_r = (current_sum > max_sum_r) ? current_sum:max_sum_r;
+    }
+
+    // calculate the sum of each column.
+
+        for(i = 0 ; i < ARRAY_COLMS_SIZE ; i++)
+    {
+
+        current_sum = 0;
+        for(j = 0 ; j < ARRAY_ROWS_SIZE ; j++)
+        {
+            current_sum += Zahlen[j][i];
+        }
+        max_sum_c = (current_sum > max_sum_c) ? current_sum:max_sum_c;
+    }
+
+    //printing the row and column with the highest sum
+      for(i = 0 ; i < ARRAY_ROWS_SIZE ; i++)
+    {
+
+        current_sum = 0;
+        for(j = 0 ; j < ARRAY_COLMS_SIZE ; j++)
+        {
+            current_sum += Zahlen[i][j];
+        }
+       if(current_sum == max_sum_r)
+       {
+        cout << i << " ";
+        break;
+       }
+    }
+
+        for(i = 0 ; i < ARRAY_COLMS_SIZE ; i++)
+    {
+
+        current_sum = 0;
+        for(j = 0 ; j < ARRAY_ROWS_SIZE ; j++)
+        {
+            current_sum += Zahlen[j][i];
+        }
+        if(current_sum == max_sum_c)
+       {
+        cout << i<< endl;
+        break;
+       }
+    }
+
+
+
+
+
+    return 0;
+}
+

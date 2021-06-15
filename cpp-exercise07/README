@@ -1,0 +1,42 @@
+File: ex7a.cc
+
+========================================
+
+ Written by: Avi Toohband, id: 203341854, Login: avito
+
+ this program is getting two strings and then it takes the following actions:
+  One: print from the first string only chars, and only upper cases one!
+  Two: subtract the second string from the first one and print what is left
+  from it.
+ 
+Compile: g++ -Wall ex7a.cc –o ex7a
+
+Run: ex7a
+
+input:  abcabc
+	    a
+
+output: ABCABC bcbc
+
+
+File: ex7c.cc
+
+========================================
+
+ Writen by: Avi Toohband, id = 203341854 login = avito
+  this program is looking for the highest sequence in thats can be
+  find in both of two string and print it.
+
+Compile: g++ -Wall ex7c.cc –o ex7c
+
+Run: ex7c
+
+Input:   abcabcefrt
+         abce
+
+output:  ABCABC bcbc
+
+
+
+
+

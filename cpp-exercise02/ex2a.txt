@@ -1,0 +1,48 @@
+/*
+ex2a
+ * =============================================================
+ * Written by: Avi Toohband, id: 203341854, Login: avito
+ */
+//---------------------------
+#include <iostream>
+
+using std::cout;
+using std::endl;
+using std::cin;
+//---------------------------
+int main()
+{
+int num[4], //Array for four numbers
+    i,      //index  for the loop
+    odd=0, even=0, positive=0, negative=0, zero=0; // the outputs
+
+for (i=0 ; i<4 ; i++) // loop for the inputs
+    {
+        cin >> num[i];
+    }
+
+for (i=0 ; i<4 ; i++) // loop that checking the conditions
+    {
+        if(num[i] > 0)
+            positive +=1;
+        if(num[i] < 0)
+            negative +=1;
+        if(num[i] == 0)
+            {
+                zero +=1;
+
+            }
+        if(num[i] % 2 !=0)
+            odd +=1;
+        else
+            even +=1;
+    }
+
+
+
+cout << even << " " <<odd << " \n" << positive << " " << zero << " " << negative << endl;
+
+
+    return 0;
+}
+

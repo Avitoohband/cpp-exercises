@@ -1,0 +1,64 @@
+/*ex4c
+ * =============================================================
+ * Written by: Avi Toohband, id: 203341854, Login: avito
+ this program will get into the array values from the user, it will display the index and will go th the next cel
+ with its index's value
+ for example
+ array[0] = 5 >>> it will go to array[5]
+ display : 0 5
+*/
+//---Include Section----------
+#include <iostream>
+#include <ctime>
+#include <cstdlib>
+//---Using Section------------
+using std::cout;
+using std::cin;
+using std::endl;
+//---Const Variable-----------
+const int ARRAY_SIZE = 10; // the array size.
+//---Main Function------------
+
+int main()
+ {
+    int aray[ARRAY_SIZE],
+        counter = 1,     // counter
+        index_finder = 0,
+         i,j;            // indexes for th for's loops
+
+    bool is_loop = false;
+
+    for (int i = 0; i < ARRAY_SIZE; i++)
+    {
+   	 cin >> aray[i];
+    }
+    for (i = 0 , j = 0 ; i < ARRAY_SIZE && !is_loop; i++)
+
+    {
+   	 j = aray[i];
+   	 counter = 1;
+   	 while (!is_loop && counter < ARRAY_SIZE && aray[i] < ARRAY_SIZE)
+   	  {
+   		 counter++;
+   		 if (i == aray[j])
+   		  {
+   			 is_loop = true;
+   			 index_finder = i;
+   		 }
+
+   		 j = aray[j];
+   	 }
+    }
+    for (i = 0; i <= counter; i++)
+        {
+   	 {
+   		 cout << index_finder;
+   		 if (counter != i)
+   			 cout << " ";
+   		 index_finder = aray[index_finder];
+   	 }
+    }
+    cout << endl;
+    return 0;
+}
+

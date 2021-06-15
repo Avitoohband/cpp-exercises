@@ -1,0 +1,55 @@
+/*ex3c
+ * =============================================================
+ * Written by: Avi Toohband, id: 203341854, Login: avito
+ */
+//---------------------------
+#include <iostream>
+#include <ctime>
+#include <cstdlib>
+//---------------------------
+using std::cout;
+using std::cin;
+using std::endl;
+//---------------------------
+int main()
+{
+    srand(time(NULL));
+    int guess =0 ,limit = 0, random_number =0,again= 0;
+
+
+    cin >> limit;
+    cin >> guess;
+    random_number = rand () % 1+limit;
+
+
+    while (guess != random_number)
+        {
+           if (guess > random_number )
+            {
+                cout << "too big" << endl;
+                cin >> guess;
+            }
+           else
+           {
+                cout << "too small" << endl;
+           cin >>
+            guess;
+           }
+
+            if (guess == random_number)
+                {
+                    cout << "correct"<<endl;
+                }
+                 cout << "again? 1:YES"<<endl;
+                 cin >> again;
+                 if (again == 1)
+                 cin >> guess;
+                else
+                    break;
+
+
+        }
+
+
+    return 0;
+}

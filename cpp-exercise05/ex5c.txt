@@ -1,0 +1,108 @@
+/*ex5c
+ * =============================================================
+ * Written by: Avi Toohband, id: 203341854, Login: avito
+ this program will get into 2D_Array values and will display
+ the index of the row thats make monotony upper left one.
+ more explanations will be in the README.txt file.
+ */
+//---Include Section----------
+#include <iostream>
+#include <cstdlib>
+//---Using Section------------
+using std::cout;
+using std::cin;
+using std::endl;
+//---Const Variable-----------
+const int ARRAY_ROWS_SIZE = 5;  // the array rows size.
+const int ARRAY_COLMS_SIZE = 4; //the array columns size.
+//---Main Function------------
+int main()
+{
+    int  monotony_array[ARRAY_ROWS_SIZE][ARRAY_COLMS_SIZE], //array for values.
+         i,j,        // indexes.
+         check1 =0 , check2 = 0,  // will check if >= to this values.
+         temp = 0;         // to save temp value for calculations.
+    bool is_monotony = true;  // condition if this corner is monotony or not.
+
+    //to get the input
+    for( i = 0 ; i < ARRAY_ROWS_SIZE ; i++)
+    {
+        for(j = 0 ; j < ARRAY_COLMS_SIZE ; j++)
+        {
+
+            cin >> monotony_array[i][j];
+
+        }
+
+    }
+
+    check2 = monotony_array[0][0];
+
+    // to find the smallest value in the array;
+    for( i = 0 ; i < ARRAY_ROWS_SIZE ; i++)
+    {
+        for(j = 0 ; j < ARRAY_COLMS_SIZE ; j++)
+        {
+
+            check2 = (check2 > monotony_array[i][j]) ?
+            monotony_array[i][j]:check2;
+        }
+
+    }
+
+
+    check1 = monotony_array[0][0];
+
+    //will check now which corner is giving the monotony one
+    for(i = 0 ; i < ARRAY_ROWS_SIZE && is_monotony ; i++)
+    {
+        temp = check2 -1;
+
+        for(j = 0 ; j < ARRAY_COLMS_SIZE -i && is_monotony ; j++)
+        {
+
+                if(monotony_array[i][j] >=temp)
+                {
+                temp = monotony_array[i][j];
+                }
+                else
+                    {
+                    is_monotony = false;
+                    i += 1 ;
+                    break;
+                    }
+              if(i != 0 )
+                {
+                     if(monotony_array [i][0] >= monotony_array[i-1]
+                        [ ARRAY_COLMS_SIZE - i])
+                    {
+                        is_monotony = false;
+                        i += 1 ;
+                        break;
+                    }
+                  if(monotony_array[i][0] < monotony_array[i-1][0])
+                    {
+                        is_monotony =false;
+                        break;
+                    }
+
+                  if(monotony_array[i][0] < monotony_array[0][i-1])
+                    {
+                        is_monotony = false;
+                        break;
+                    }
+
+
+               }
+
+
+        }
+    check1 = i;
+
+    }
+
+
+    cout << check1<<endl;
+
+    return EXIT_SUCCESS;
+}

@@ -1,0 +1,38 @@
+/*
+ex1c
+ * =============================================================
+ * Written by: Avi Toohband, id: 203341854, Login: avito
+ */
+//---------------------------
+#include <iostream>
+#include <math.h>
+#define PI 3.141
+
+using std::cout;
+using std::endl;
+using std::cin;
+//---------------------------
+int main()
+{
+    double x1 = 0, y1 =0,      //upper left coordinations
+           x2 = 0, y2 =0,      //down right coordinations
+           radius1 = 0 ,sum1 = 0,radius2 = 0,  sum2 = 0;
+
+    cin >> x1 >> y1 >> x2 >> y2;
+
+    radius1 = (y1-y2)/2;
+    cout << radius1 << " ";
+    sum1 = (((y1-y2)/2)*((y1-y2)/2))*PI;
+    cout << sum1;
+    cout<< " " << 2*PI*radius1 << endl;
+
+
+    radius2 = (sqrt((x1-x2)*(x1-x2)+(y1-y2)*(y1-y2)))/2;
+    cout << radius2 << " ";
+    sum2 = radius2*radius2*PI;
+    cout << sum2;
+    cout << " " << 2*PI*radius2 << endl;
+
+    return 0;
+}
+//---------------------------

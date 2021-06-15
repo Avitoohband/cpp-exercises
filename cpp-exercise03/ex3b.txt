@@ -1,0 +1,40 @@
+/*ex3b
+ * =============================================================
+ * Written by: Avi Toohband, id: 203341854, Login: avito
+ */
+//---------------------------
+#include <iostream>
+//---------------------------
+using std::cout;
+using std::cin;
+using std::endl;
+//---------------------------
+int main()
+{
+    unsigned int num1=0, num2=0, // input variables
+                 result =0;     // greatest common divisor (output variable)
+
+
+cin >> num1 >> num2;
+while (num1 != 0 && num2 != 0)
+    {
+
+        for(int i=1;i<=num1&&i<=num2;i++)
+            {
+
+                if(num1%i==0 && num2%i == 0 )
+                    result=i;
+            }
+
+
+      cout << result<<endl;
+      cin >> num1;
+      if (num1 == 0)
+      break;
+      else
+      cin>> num2;
+
+    }
+
+    return 0;
+}

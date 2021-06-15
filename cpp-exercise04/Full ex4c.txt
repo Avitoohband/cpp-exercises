@@ -1,0 +1,57 @@
+int main() {
+
+	int counter = 1, // save iteration until found loop use for print
+			loop_index = 0; // save the index the loop start and end
+	int myArray[LENGTH_array]; // save inputs
+	bool find_loop = false ; // condition for know find loop
+	bool index_equal_to_content = false; //condition for know if index equal to is content
+
+	for (int i = 0; i < LENGTH_array; i++) {
+		cin >> myArray[i]; // input 10 numbers
+	}
+
+	// check all inputs in array <= LENGTH_array && stop if find loop
+	for (int i = 0, j = 0; i < LENGTH_array && !find_loop; i++) {
+		j = myArray[i]; // save the current value in array in j
+		counter = 1;
+		if(myArray[i] != i)
+		{
+			while (!find_loop && // stop if find loop
+					counter < LENGTH_array && // stop if ther inside loop is start not from current index
+					myArray[j] <= LENGTH_array && // stop if value in array big then arry size
+					myArray[j] >=0 && // stop if index negetive
+					myArray[i] >= 0 && // stop if index negetive
+					myArray[i] < LENGTH_array)
+			{
+
+				counter++; // save number of iteration until found loop
+				if (i == myArray[j]) {  // check if the current index equal to number in the next sale{ myArray[j]}
+					find_loop = true;
+					loop_index = i; // save the index when the loop starts
+				}
+				j = myArray[j]; /l/ Forward to the next sale in array
+			}
+		}
+		else
+		{ //in case the number in sale equal to is sale
+			find_loop = true;
+			index_equal_to_content =true;
+			cout << myArray[i] << " " << myArray[i];
+		}
+	}
+
+	//check that not found loop or number in sale equal to is sale
+	for (int i = 0; i <= counter && !index_equal_to_content && find_loop; i++) {
+		 // run same time as take to find the loop
+			cout << loop_index;
+
+			if (counter != i)
+				cout << " ";
+			loop_index = myArray[loop_index]; // Forward to the next sale in array
+
+	}
+	cout << endl;
+	return 0;
+'
+
+}

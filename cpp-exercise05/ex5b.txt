@@ -1,0 +1,134 @@
+/*ex5b
+ * =============================================================
+ * Written by: Avi Toohband, id: 203341854, Login: avito
+ this program will get values into 2D_Array and will display the index of the
+  row that contain all
+ the rest of the array (include it self obviously)
+ */
+//---Include Section----------
+#include <iostream>
+#include <cstdlib>
+//---Using Section------------
+using std::cout;
+using std::cin;
+using std::endl;
+//---Const Variable-----------
+const int ARRAY_ROWS_SIZE = 4;  // the array rows size.
+const int ARRAY_COLMS_SIZE = 5; //the array columns size.
+//---Main Function------------
+int main()
+{
+    int  i,j,k,l, checkrow = 0 ,checkcol= 0, // indexes
+         contain_array[ARRAY_ROWS_SIZE][ARRAY_COLMS_SIZE], //2d array to get
+                                                           //the values
+         counter1 = 0, counter2 = 0;    // counter to check how many times
+                                        //the value is shows up
+
+    bool contain_row = true, // to know if which row is the containing one
+         contain_row2 = true;
+
+    // will get values into the array
+    for(i =  0 ; i < ARRAY_ROWS_SIZE ; i++)
+    {
+        for(j = 0 ; j < ARRAY_COLMS_SIZE ; j++)
+        {
+            cin >> contain_array[i][j];
+        }
+
+    }
+    //will check if there is a container one.
+   for(checkrow = 0 ; checkrow < ARRAY_ROWS_SIZE ; checkrow++)
+        {
+            contain_row = true;
+            for( i = 0 ; i < ARRAY_ROWS_SIZE && contain_row ; i++ )
+            {
+                for(j = 0 ; j < ARRAY_COLMS_SIZE && contain_row;
+                                                           j++ )
+                {
+
+                    for(checkcol = 0 ; checkcol < ARRAY_COLMS_SIZE ;checkcol++)
+                    {
+
+                        if(contain_array[i][j] == contain_array[checkrow]
+                                                               [checkcol])
+                        {
+                         contain_row = true;
+                         break;
+                        }
+                        else
+                        {
+                         contain_row = false;
+
+                        }
+                    }
+                }
+
+            }
+              if (contain_row)
+                {
+                cout << checkrow << endl;
+                break;
+               }
+
+       }
+
+    if (!contain_row)
+        cout << "-1\n";
+
+for(checkrow = 0 ; checkrow < ARRAY_ROWS_SIZE ; checkrow++)
+        {
+            contain_row2 = true;
+
+            for( i = 0 ; i < ARRAY_ROWS_SIZE && contain_row2 ; i++ )
+            {
+                for(j = 0 ; j < ARRAY_COLMS_SIZE && contain_row2;
+                                                           j++ )
+                {
+                    if (contain_array[i][j] == 0)
+                        continue;
+                    counter1 = 0;
+                    for(k = 0 ; k < ARRAY_COLMS_SIZE ; k++)
+                    {
+                        if (contain_array[i][j] == contain_array[i][k])
+                            counter1++;
+                    }
+                    for(checkcol = 0 ; checkcol < ARRAY_COLMS_SIZE ;checkcol++)
+                    {
+                    if (contain_array[checkrow][checkcol] == 0)
+                        continue;
+                    counter2 = 0;
+                    for(l = 0 ;l< ARRAY_COLMS_SIZE ; l++ )
+                    {
+                        if (contain_array[checkrow][checkcol] == contain_array[checkrow][l])
+                            counter2++;
+
+                        if(contain_array[i][j] == contain_array[checkrow]
+                                                               [checkcol]
+                                                  && counter1 <= counter2)
+                        {
+                         contain_row2 = true;
+                         break;
+                        }
+                        else
+                        {
+                         contain_row2 = false;
+
+                        }
+                    }
+                }
+
+             }
+
+
+            }
+                    if (contain_row2)
+                {
+                cout << checkrow << endl;
+                break;
+               }
+        }
+    if (!contain_row2)
+        cout << "-1\n";
+
+    return EXIT_SUCCESS;
+}

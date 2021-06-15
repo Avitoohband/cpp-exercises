@@ -1,0 +1,115 @@
+    /*
+ex2c
+ * =============================================================
+ * Written by: Avi Toohband, id: 203341854, Login: avito
+ */
+//---------------------------
+#include <iostream>
+#include <string>
+//---------------------------
+using std::endl;
+using std::cout;
+using std::cin;
+using std::string;
+//---------------------------
+int main()
+{
+
+int jan = 31, febr = 28, mar = 31, apr = 30,  // variable for months of the year
+    may = 31, june = 30, july = 31, aug = 31,
+    sept = 30, octo = 31, nov = 30, dec = 31,
+
+    day = 0, month = 0, year = 0; // variables for the input
+
+string month_display, day_suffix;  // strings to display on board
+
+    cin >> day >> month >> year;
+
+    if (day > 0 && day <= 31 && month > 0 && month <= 12 && year > 0 && year <= 3000)  // main conditions
+    {
+        switch(month) //  switch command to determine what month to display
+        {
+            case 1:
+                                {
+                    if(day <= jan) month_display = "January";
+
+                } break;
+            case 2:
+                                {
+                    if(year % 4 == 0 && year % 100 != 0)
+                        {
+                            febr += 1;
+                            if(day <= febr) month_display = "February";
+                            //febr =28;
+                        }
+                    else if(year % 400 ==0)
+                        {
+                            febr += 1;
+                            if(day <= febr) month_display = "February";
+                            //febr =28;
+                        }
+                    else
+                        {
+                            if(day <= febr) month_display = "February";
+                        }
+
+                } break;
+            case 3:
+                                {
+                    if(day <= mar) month_display = "March";
+                } break;
+            case 4:
+                                {
+                    if(day <= apr) month_display = "April";
+                } break;
+            case 5:
+                                {
+                    if(day <= may) month_display = "May";
+                } break;
+            case 6:
+                                {
+                    if(day <= june) month_display = "June";
+                } break;
+            case 7:
+                                {
+                    if(day <= july) month_display = "July";
+                } break;
+            case 8:
+                                {
+                    if(day <= aug) month_display = "August";
+                } break;
+            case 9:
+                                {
+                    if(day <= sept) month_display = "September";
+                } break;
+            case 10:
+                                {
+                    if(day <= octo) month_display = "October";
+                } break;
+            case 11:
+                                {
+                    if(day <= nov) month_display = "November";
+                } break;
+            case 12:
+                                {
+                    if(day <= dec) month_display = "December";
+                } break;
+
+        }
+
+if (day % 10 == 1)day_suffix = "st";
+else if (day % 10 == 2)day_suffix = "nd";
+else if (day % 10 == 3)day_suffix = "rd";
+else day_suffix = "th";
+
+if (month == 2 && day > febr ) cout << " " ; //condition for Feb's days
+else
+    cout << day << day_suffix << " " << month_display << " " << year << endl;
+    }
+
+
+
+return 0;
+}
+//---------------------------
+

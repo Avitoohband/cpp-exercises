@@ -1,0 +1,212 @@
+/*ex6b
+ * =============================================================
+ * Written by: Avi Toohband, id: 203341854, Login: avito
+  this program is divided by two parts,
+  one: it is search for contain-row*
+  second: it will be interested to see if the contain and the contained
+  rows have the same numbers of appears for the following numbers
+  (0 is considered as empty cell and won't be included in the calculating).
+
+  for these two part it will be displayed the number of row that contain and
+  if there is no such one, -1 will be the value that showed up.
+
+  *contain row: if it has the values inside as the same values that all the
+  rest rows have.
+
+  in-depth information will be included in the README file.
+ */
+//---Include Section----------
+#include <iostream>
+#include <cstdlib>
+//---Using Section------------
+using std::cout;
+using std::cin;
+using std::endl;
+//---Const Variables-----------
+const int ROWS = 4;  // the array rows max size.
+const int COLMS = 5; //the array columns max size.
+//---Functions Declarations---
+void insert_to_array(int my_array[][COLMS]) ;
+//---For Part Number One------
+void search_contain_row(const int my_array[][COLMS]) ;
+bool check_this_row(const int my_array[][COLMS],const int row_to_check);
+bool compare_to_row(const int my_array[][COLMS],const int to_row,
+                    const int row_to_check);
+//---For Part Number Two------
+void search_contain_row2(const int my_array[][COLMS]) ;
+bool check_this_row2(const int my_array[][COLMS],const int row_to_check);
+bool compare_to_row2(const int my_array[][COLMS],const int to_row,
+                    const int row_to_check);
+//---Main Function------------
+int main()
+{
+    int my_array[ROWS][COLMS];
+    insert_to_array(my_array);
+    search_contain_row(my_array);
+    search_contain_row2(my_array);
+    return EXIT_SUCCESS;
+}
+//---Functions Section--------
+//get values into the array
+void insert_to_array(int my_array[][COLMS])
+{
+   // int row,col; // indexes for the loop
+
+    for(int row = 0 ; row < ROWS ; row++)
+    {
+        for(int col = 0 ; col <COLMS ; col++)
+        {
+            cin >> my_array[row][col];
+        }
+    }
+
+}
+//---Part One-----------------
+//looking for containing one
+void search_contain_row(const int my_array[][COLMS])
+{
+    int row;
+    bool is_contain = false;
+
+    for (row = 0 ; row < ROWS ; row++)
+    {
+        is_contain = check_this_row(my_array, row);
+
+        if(is_contain)
+            {
+                cout << row <<endl;
+                break;
+            }
+
+    }
+                if(!is_contain )
+
+                cout << "-1" <<endl;
+
+
+}
+//----------------------------
+//checking of a specific row if it is the one who contains
+bool check_this_row(const int my_array[][COLMS], const int row_to_check)
+{
+    int row;
+    bool is_contain = false;
+
+    for(row = 0 ; row < ROWS ; row++)
+    {
+        if (row == row_to_check)
+            continue;
+        is_contain = compare_to_row(my_array, row, row_to_check);
+
+        if (!is_contain)
+            break;
+    }
+    return is_contain;
+}
+//----------------------------
+//compare two rows together and to check if equals
+bool compare_to_row(const int my_array[][COLMS],const int to_row,
+                    const int row_to_check)
+{
+    int  maincol, col ;
+    bool is_contain = true;
+
+
+    for(maincol = 0 ; maincol < COLMS ; maincol++)
+    {
+
+       for(col = 0 ; col < COLMS  ; col++)
+       {
+           if(my_array[row_to_check][col] == my_array[to_row][maincol])
+           {
+                break;
+           }
+           if(my_array[row_to_check][col] != my_array[to_row][maincol]
+              && col == COLMS -1)
+              return false;
+
+       }
+    }
+    return is_contain;
+
+}
+//---Part Two-----------------
+//looking for containing one
+void search_contain_row2(const int my_array[][COLMS])
+{
+    int row;
+    bool is_contain = false;
+
+    for (row = 0 ; row < ROWS ; row++)
+    {
+        is_contain = check_this_row2(my_array, row);
+
+        if(is_contain)
+            {
+                cout << row;
+                break;
+            }
+
+    }
+                if(!is_contain )
+
+                cout << "-1";
+
+
+
+}
+//----------------------------
+//checking of a specific row if it is the one who contains
+bool check_this_row2(const int my_array[][COLMS], const int row_to_check)
+{
+    int row;
+    bool is_contain = false;
+
+    for(row = 0 ; row < ROWS ; row++)
+    {
+        if (row == row_to_check)
+            continue;
+        is_contain = compare_to_row2(my_array, row, row_to_check);
+
+        if (!is_contain)
+            break;
+    }
+    return is_contain;
+}
+//----------------------------
+//compare two rows together and to check if equals
+bool compare_to_row2(const int my_array[][COLMS],const int to_row,
+                    const int row_to_check)
+{
+    int  maincol, col,
+         counter1 = 0, counter2 = 0 ;
+
+
+    for(maincol = 0 ; maincol < COLMS  ; maincol++)
+    {
+
+        if(my_array[to_row][maincol] == 0)
+            continue;
+
+            for(int i = 0 ; i < COLMS ; i++)
+            {
+                if(my_array[to_row][maincol] == my_array[to_row][i])
+               counter1++;
+            }
+            for(int z = 0 ; z < COLMS ; z++)
+            {
+                if(my_array[row_to_check][z] == my_array[to_row][maincol])
+                counter2++;
+            }
+
+        if(counter2 < counter1)
+          return false;
+
+    counter1 = counter2 = 0;
+
+    }
+    return true;
+
+}
+//----------------------------
+

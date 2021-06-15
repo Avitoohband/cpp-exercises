@@ -1,0 +1,91 @@
+/*ex3c
+ * =============================================================
+ * Written by: Avi Toohband, id: 203341854, Login: avito
+ */
+//---Include Section----------
+#include <iostream>
+#include <ctime>
+#include <cstdlib>
+//---Using Section------------
+using std::cout;
+using std::cin;
+using std::endl;
+//---Main Function------------
+int main ()
+{
+
+        int limit = 0 , // input range limit for random number
+            counter = 0, way_to_victory = 0 , // counter for the steps for the unlucky gusser and the gusser it self
+            lucky_shot = 0, // input guess
+            unlucky_gusser = 0, // for the algorithm to check how many steps should rational unlucky should do
+            random_number = 0, // for the random number obviously
+            grade = 0 ,// grade.
+            again = 0 ; // for the term to start over
+           srand(1) ;
+
+
+while (5>4)
+{
+            counter = 0 ;
+            way_to_victory = 0;
+            unlucky_gusser = 0;
+            cin >> limit ;
+            random_number = rand() % (limit + 1) ;
+
+		if ( limit % 2 != 0 )
+			limit++;
+
+		for (int temp = limit / 2; ; temp = temp /2 )
+		{
+		      counter ++;
+
+         if (unlucky_gusser  > random_number)
+            unlucky_gusser = unlucky_gusser - temp;
+         else
+            unlucky_gusser = unlucky_gusser + temp;
+
+         if (unlucky_gusser == random_number)
+         break;
+         if (temp %2 != 0)
+             temp++;
+
+		}
+
+		while ( lucky_shot != random_number )
+		{
+			cin >> lucky_shot ;
+			way_to_victory ++ ;
+			if ( lucky_shot > random_number )
+			cout << " too big " << endl ;
+			if ( lucky_shot < random_number )
+			cout << " too small " << endl ;
+
+		}
+                if ( counter / way_to_victory >= 1)
+
+                grade = 100 ;
+
+                else
+                grade = (counter * 100) / way_to_victory;
+
+
+
+
+
+
+
+			cout << way_to_victory << " " << counter << endl ;
+			cout << grade << endl ;
+			cout << "again? 1:YES" << endl ;
+			cin >> again ;
+
+			if ( again != 1)
+                return 0 ;
+
+
+}
+
+     return 0;
+
+}
+

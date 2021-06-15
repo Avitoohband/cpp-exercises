@@ -1,0 +1,44 @@
+/*ex4a
+ * =============================================================
+ * Written by: Avi Toohband, id: 203341854, Login: avito
+This program will get 6 numbers and  calculate the differency of the numbers
+ */
+//---Include Section----------
+#include <iostream>
+#include <ctime>
+#include <cstdlib>
+//---Using Section------------
+using std::cout;
+using std::cin;
+using std::endl;
+//---Const Variable-----------
+const int  ARRAY_SIZE =6; // array size
+//---Main Function------------
+int main ()
+{
+double ar[ARRAY_SIZE];  // array to get six numbers
+double average = 0, // get the average of the six numbers 
+       result = 0; // get last result 
+int i ; // index
+
+
+    for(i = 0; i <=ARRAY_SIZE ; i++)
+    {
+        cin >> ar[i];
+        average += ar[i];
+    }
+
+    average /= i;
+    cout <<average << endl;
+
+    for (i = 0 ; i <= ARRAY_SIZE ; i++)
+    {
+        result += (ar[i] - average)* (ar[i] - average);
+    }
+ cout << result/i;
+
+
+
+
+    return 0;
+}

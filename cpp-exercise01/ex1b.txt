@@ -1,0 +1,27 @@
+/*
+ex1b
+============================
+*written by: Avi Toohband, ID: 203341854, Login: avito
+*/
+//--------------------------------
+#include <iostream>
+#include <math.h>
+using std::endl;
+using std::cout;
+using std::cin;
+//--------------------------------
+int main()
+{
+    double a = 0 , b = 0, c = 0 ,//triangle attributes
+           s = 0,
+           x = 0;               //for Heron formula
+
+    cin >>a >> b >> c;
+    s=(a+b+c)/2;
+    x=sqrt(s*(s-a)*(s-b)*(s-c));
+
+    cout << x << endl;
+    cout << a+b+c << endl;
+    return 0;
+}
+//--------------------------------

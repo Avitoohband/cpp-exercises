@@ -1,0 +1,171 @@
+/*ex6b
+ * =============================================================
+ * Written by: Avi Toohband, id: 203341854, Login: avito
+  this program is divided by two parts,
+  one: it is search for contain-row*
+  second: it will be interested to see if the contain and the contained
+  rows have the same numbers of appears for the following numbers
+  (0 is considered as empty cell and won't be included in the calculating).
+
+  for these two part it will be displayed the number of row that contain and
+  if there is no such one, -1 will be the value that showed up.
+
+  *contain row: if it has the values inside as the same values that all the
+  rest rows have.
+
+  in-depth information will be included in the README file.
+ */
+//---Include Section----------
+#include <iostream>
+#include <cstdlib>
+//---Using Section------------
+using std::cout;
+using std::cin;
+using std::endl;
+//---Const Variables-----------
+const int ROWS = 4;  // the array rows max size.
+const int COLMS = 5; //the array columns max size.
+//---Functions Declarations---
+void insert_to_array(int arr[][COLMS]) ;
+void search_contain_row(const int arr[][COLMS]) ;
+void search_eq_num_of_appears(const int arr[][COLMS]) ;
+//---Main Function------------
+int main()
+{
+    int my_array[ROWS][COLMS];// the array to
+
+
+    insert_to_array(my_array); // function to get values from the user
+    search_contain_row(my_array);
+
+
+return EXIT_SUCCESS;
+}
+//---Functions Section--------
+void insert_to_array(int arr[][COLMS])
+{
+   // int row,col; // indexes for the loop
+
+    for(int row = 0 ; row < ROWS ; row++)
+    {
+        for(int col = 0 ; col <COLMS ; col++)
+        {
+            cin >> arr[row][col];
+        }
+    }
+
+}
+//----------------------------
+void search_contain_row(const int my_array[][COLMS])
+{
+    int check_row , check_col, to_row, to_col, // indexes for the loops
+        check_cell = 0 ; // to storage the value we want to check later
+    bool is_contain = false;
+    for(check_row = 0 ; check_row < ROWS && !is_contain; check_row++)
+    {
+        is_contain = true;
+        for (to_row = 0 ; to_row < ROWS && is_contain ; to_row++)
+        {
+            if(check_row == to_row)
+                continue;
+            for(to_col = 0 ; to_col < COLMS && is_contain ; to_col++)
+            {
+                check_cell = my_array[to_row][to_col];
+                is_contain = false;
+                for(check_col = 0 ; check_col < COLMS && !is_contain ;
+                                                          check_col++)
+                {
+                    if(check_cell == my_array[check_row][check_col])
+                       is_contain = true;
+                    else
+                       is_contain = false;
+
+                }
+            }
+        }
+    }
+
+    if(is_contain)
+    {
+       cout << check_row -1 << " ";
+       search_eq_num_of_appears(my_array);
+    }
+    else
+    {
+       cout << "-1" << " ";
+       search_eq_num_of_appears(my_array);
+    }
+
+}
+//----------------------------
+void search_eq_num_of_appears(const int my_array[][COLMS])
+{
+    int check_row , check_col, to_row, to_col, // indexes for the loops
+        check_cell = 0 , // to storage the value we want to check later
+        counter1 = 0, counter2 = 0 ; // counter to check
+                                    //if appear the same times
+    bool is_contain = false;
+    bool snoa = false ; // if has the "same numbers of apears"
+    for(check_row = 0 ; check_row < ROWS && !is_contain; check_row++)
+    {
+        is_contain = true;
+        for (to_row = 0 ; to_row < ROWS && is_contain ; to_row++)
+        {
+            if(check_row == to_row)
+                continue;
+            for(to_col = 0 ; to_col < COLMS && is_contain ; to_col++)
+            {
+                if(my_array[to_row][to_col] == 0 )
+                    continue;
+                    counter1 = 0;
+                for(int temp = 0 ; temp < COLMS ; temp++)
+                {
+                    if(my_array[to_row][to_col] == my_array[to_row][temp])
+                    counter1++;
+                                    }
+                check_cell = my_array[to_row][to_col];
+                is_contain = false;
+                for(check_col = 0 ; check_col < COLMS && !is_contain ;
+                                                           check_col++)
+                {
+                    if(my_array[check_row][check_col] == 0 )
+                       continue;
+                    counter2 = 0;
+                    for(int temp = 0 ; temp < COLMS ; temp++)
+                {
+                    if(my_array[check_row][check_col]
+                        == my_array[check_row][temp])
+                    counter2++;
+
+                    if(my_array[check_row][check_col] == my_array[to_row]
+                                       [to_col] && counter1 >= counter2 )
+                    {
+                        snoa = true;
+
+                    }
+                    else
+                    {
+                        snoa = false;
+
+                    }
+                }
+                    if(check_cell == my_array[check_row][check_col])
+                       is_contain = true;
+                    else
+                       is_contain = false;
+
+
+
+
+                }
+            }
+        }
+
+    }
+
+    if(snoa)
+       cout <<check_row -1 << " ";
+    else
+       cout << "-1";
+
+}

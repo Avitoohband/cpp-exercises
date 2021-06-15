@@ -1,0 +1,74 @@
+/*ex4c
+ * =============================================================
+ * Written by: Avi Toohband, id: 203341854, Login: avito
+ this program will get into the array values from the user, it will display the index and will go th the next cel
+ with its index's value
+ for example
+ array[0] = 5 >>> it will go to array[5]
+ display : 0 5
+*/
+//---Include Section----------
+#include <iostream>
+#include <ctime>
+#include <cstdlib>
+//---Using Section------------
+using std::cout;
+using std::cin;
+using std::endl;
+//---Const Variable-----------
+const int ARRAY_SIZE = 10; // the array size.
+//---Main Function------------
+int main()
+{
+
+	int  counter = 1,      // save the times it took to  found loop use for print
+         index_start = 0,  // save the index of the loop
+	     ar[ARRAY_SIZE];   // the array
+	bool is_loop = false ; // to know if  loop
+	bool is_equal = false; // to know if equal
+
+    // get 10 numbers from the user
+	for (int i = 0; i < ARRAY_SIZE; i++)
+    {
+		cin >> ar[i];
+    }
+
+	for (int i = 0, j = 0; i < ARRAY_SIZE && !is_loop; i++)
+        {
+		j = ar[i];
+		counter = 1;
+		if(ar[i] != i)
+		{
+			while (!is_loop &&	counter < ARRAY_SIZE && ar[j] <= ARRAY_SIZE && ar[j] >=0 &&	ar[i] >= 0
+                    &&ar[i] < ARRAY_SIZE)
+			{
+
+				counter++;
+				if (i == ar[j])
+				{
+				is_loop = true;
+				index_start = i;
+				}
+				j = ar[j];
+			}
+		}
+		else
+		{
+			is_equal = true;
+			is_equal =true;
+			cout << ar[i] << "\40" << ar[i];
+		}
+	}
+	for (int i = 0; i <= counter && is_loop && !is_equal; i++) {
+			cout << index_start;
+
+			if (counter != i)
+				cout << "\40";
+			index_start = ar[index_start];
+
+	}
+	cout << endl;
+
+	return 0;
+
+}

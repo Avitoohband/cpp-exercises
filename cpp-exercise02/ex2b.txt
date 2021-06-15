@@ -1,0 +1,67 @@
+/*
+ex2b
+ * =============================================================
+ * Written by: Avi Toohband, id: 203341854, Login: avito
+ */
+//---------------------------
+#include <iostream>
+
+using std::cout;
+using std::endl;
+using std::cin;
+//---------------------------
+int main()
+{
+    int num1 =0,num2 =0,num3 =0,  //the numbers for the arithmetics
+        leftnum =0,centernum =0,rightnum =0, // number positions
+        mul =0;  // The number we will use to multiply
+
+        cin >> num1>>num2>>num3;
+
+        if (num1 >= num2 && num1 >= num3)   // set the right number
+            rightnum=num1;
+        if (num2 >= num1 && num2 >= num3)
+            rightnum=num2;
+        if (num3 >= num2 && num3 >= num1)
+            rightnum=num3;
+
+        if(num1  <= num2 && num1 <= num3) //set the left number
+            leftnum = num1;
+        if(num2  <= num1 && num2 <= num3)
+            leftnum = num2;
+        if(num3  <= num1 && num3 <= num2)
+            leftnum = num3;
+
+        if (num1 <= num2 && num1 >= num3 || num1 >= num2 && num1 <= num3) // set the center number
+            centernum=num1;
+        if (num2 <= num1 && num2 >= num3 || num2 >= num1 && num2 <= num3)
+            centernum=num2;
+        if (num3 <= num2 && num3 >=num1 || num3 >= num2 && num3 <= num1)
+            centernum=num3;
+        if ((num1 == 0 || num1 == 1) && (num2 == 0 || num2 == 1) && (num3 == 0 || num3 == 1))
+
+        cout << "" << num1 << "*" << num3 << ""
+             << "+" << num2 << "=" << num1*num3+num2 <<endl;
+
+       else if (num1< 0 && num2< 0 && num3 > 0 )
+
+        cout << "" << num1 << "*" << num2 << ""
+             << "+" << num3 << "=" << num1*num2+num3 <<endl;
+
+       else if (num1 < 0 && num3 < 0 && num2 > 0)
+
+        cout << "" << num1 << "*" << num3 << ""
+             << "+" << num2 << "=" << num1*num3+num2 <<endl;
+
+       else if (num1 > 0 && num2 < 0 && num3 < 0)
+
+        cout << "" << num2 << "*" << num3 << ""
+             << "+" << num1 << "=" << num2*num3+num1 <<endl;
+
+       else
+            cout << "(" << leftnum << "+" << centernum << ")"  // the output
+                 << "*" << rightnum << "=" <<(leftnum+centernum)*rightnum;
+
+
+    return 0;
+}

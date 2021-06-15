@@ -1,0 +1,106 @@
+/*ex6a
+ * =============================================================
+ * Written by: Avi Toohband, id: 203341854, Login: avito
+ this program is getting values into 2D_Array and return its biggest
+ sum row's index and the same for column.
+ */
+//---Include Section----------
+#include <iostream>
+#include <cstdlib>
+//---Using Section------------
+using std::cout;
+using std::cin;
+using std::endl;
+//---Const Variable-----------
+const int ARRAY_ROWS_SIZE = 4;  // the array rows size.
+const int ARRAY_COLMS_SIZE = 5; //the array columns size.
+//---Functions Declarations---
+void insert_to_array(int my_array[][ARRAY_COLMS_SIZE]) ;
+void search_row(const int my_array[][ARRAY_COLMS_SIZE]) ;
+int sum_row(const int my_array[]);
+void search_col(const int my_array[][ARRAY_COLMS_SIZE]) ;
+int sum_col(const int my_array[][ARRAY_COLMS_SIZE] ,int col);
+//---Main Function------------
+int main()
+{
+     int sum_array[ARRAY_ROWS_SIZE][ARRAY_COLMS_SIZE];// the array to
+                                                      //get values
+
+    insert_to_array(sum_array); // function to get values from the user
+    search_row(sum_array); // to sum its row values
+    search_col(sum_array); // to sum its colunmn values
+
+    return EXIT_SUCCESS;
+}
+//---Functions Section--------
+//get values into the array
+void insert_to_array(int my_array[][ARRAY_COLMS_SIZE])
+{
+    int row,col; // indexes for the loop
+
+    for(row = 0 ; row < ARRAY_ROWS_SIZE ; row++)
+    {
+        for(col = 0 ; col < ARRAY_COLMS_SIZE ; col++)
+        {
+            cin >> my_array[row][col];
+        }
+    }
+
+}
+//----------------------------
+// looking for the highest row sum
+void search_row (const int my_array[][ARRAY_COLMS_SIZE])
+{
+    int row, col,  // indexes for the loops.
+        biggest_row = 0;
+    for (row = 1 ; row < ARRAY_ROWS_SIZE ; row++)
+    {
+        if(sum_row(my_array[biggest_row])< sum_row(my_array[row]))
+            biggest_row = row;
+    }
+    cout << biggest_row << " ";
+}
+//----------------------------
+// calculate the sum of a row.
+int sum_row(const int my_array[])
+{
+    int col,
+        current_sum = 0;
+
+    for(col = 0 ; col < ARRAY_COLMS_SIZE ; col++)
+    {
+        current_sum += my_array[col];
+
+    }
+    return current_sum;
+}
+//----------------------------
+// looking for the highest column sum
+void search_col (const int my_array[][ARRAY_COLMS_SIZE])
+{
+    int col,  // indexes for the loops.
+        biggest_col = 0;
+    for (col = 1 ; col < ARRAY_COLMS_SIZE ; col++)
+    {
+        if(sum_col(my_array , biggest_col)< sum_col(my_array , col))
+            biggest_col = col;
+    }
+    cout << biggest_col<<endl;
+}
+
+//----------------------------.
+// calculate the sum of a column.
+int sum_col(const int my_array[][ARRAY_COLMS_SIZE],int col)
+{
+    int row,
+        current_sum = 0, max_sum = 0;
+
+       for (row = 0 ; row < ARRAY_ROWS_SIZE ; row++)
+       {
+            current_sum += my_array[row][col];
+       }
+
+
+    return current_sum;
+}
+//----------------------------

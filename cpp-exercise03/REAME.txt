@@ -1,0 +1,42 @@
+File: ex3a.cc
+Avrage and Counters!
+ ========================================
+ Writen by: Avi Toohband, id = 203341854 login = avito
+
+This program calculates count positives, negatives numbers and its avrages.
+
+Compile: g++ -Wall ex3a.cc –o ex3a
+Run: ex3a
+Input: many numbers as you want. zero to break.
+
+Output: how many numbers  was entered, its avrages, how many postivies and negatives numbers was entered.
+
+File: ex3b.cc 
+Greatest  common divisor
+ ========================================
+ Writen by:Avi Toohband, id = 203341854 login = avito
+
+This program will check what is the Greatest common divisor between to numbers , reapet the proccess till it get the value of 0
+
+Compile: g++ -Wall ex3b.cc -o ex3b
+Run: ex3b
+Input:   two numbers but no zero, if zero it will break.
+Output: Greatest common divisor between those two numbers.
+
+File: ex3c.cc
+
+ ========================================
+ Writen by:Avi Toohband, id = 203341854 login = avito
+
+This program is a lotto simulator
+
+Compile: g++ -Wall ex1a.cc –o ex3c
+Run: ex3c
+Input: 	   the upper limit for the random number and gusses to hit the random number.
+Output: if the guess is higher then the random number it will be "too high" , if it smaller it will be " too small and if it qual it will print the number of gusses number, how many arational gusser  will do, and a grade.
+then it will ask to start over by insert the value of 1 or else to get out.
+
+
+
+
+

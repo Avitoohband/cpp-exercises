@@ -1,0 +1,60 @@
+/*ex4b
+ * =============================================================
+ * Written by: Avi Toohband, id: 203341854, Login: avito
+ this program get ten numbers ,check what is the common between them and display it.
+ if there is more the one common, it will be show in the subsequence
+ */
+//---Include Section----------
+#include <iostream>
+#include <ctime>
+#include <cstdlib>
+//---Using Section------------
+using std::cout;
+using std::cin;
+using std::endl;
+//---Const Variable-----------
+const int ARRAY_SIZE = 10; // the array size.
+//---Main Function------------
+int main ()
+{
+int ar[ARRAY_SIZE]; // array to get 10 numbers
+    int i,j, // indexes
+    max_times = 0, // get the most showed number counter
+    counter = 1; // counter.
+
+for (i = 0 ; i < ARRAY_SIZE ; i++)
+
+    {
+        cin >> ar[i];
+    }
+    for (i = 0 ; i < ARRAY_SIZE ; i++)
+    {
+    	max_times = (counter > max_times) ? counter:max_times;
+
+    	counter = 1;
+
+        for(j =i +1; j< ARRAY_SIZE ; j++)
+        {
+           if (ar[i] == ar[j])
+           counter ++;
+        }
+    }
+    for(i =0 ; i < ARRAY_SIZE ; i++)
+    {
+        counter=1;
+
+        for(j = i +1 ; j < ARRAY_SIZE ; j++)
+        {
+             if (ar[i]==ar[j])
+                counter++;
+        }
+        if (counter==max_times)
+        {
+          cout << ar[i] << endl;;
+        }
+
+    }
+
+
+    return 0;
+}

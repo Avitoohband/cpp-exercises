@@ -1,0 +1,147 @@
+/*ex6b
+ * =============================================================
+ * Written by: Avi Toohband, id: 203341854, Login: avito
+  this program is checking if the suduku table is true or not.
+  checking for eatch row, col and sqaure if has a unique valuse
+  for eatch one.
+ */
+//---Include Section----------
+#include <iostream>
+#include <cstdlib>
+//---Using Section------------
+using std::cout;
+using std::cin;
+using std::endl;
+//---Const Variables-----------
+const int N = 3;  // the array's rows and cols size.
+//---Functions Declarations---
+void insert_to_array(int mat[][N*N]);
+bool row_ok(const int rows[]);
+bool col_ok(const int cols[][N*N],const int col);
+bool square_ok(const int square[][N*N] ,  int row,  int col);
+
+//---Main Function------------
+int main()
+{
+    int mat[N*N][N*N]; // matrix to get the values
+
+    insert_to_array(mat); // get values inside the array
+
+    //to check the rows
+    for (int row = 0 ; row < N*N ; row++)
+    {
+        if(!row_ok(mat[row]))
+        {
+            cout <<"0\n";
+            return EXIT_SUCCESS;
+        }
+    }
+    //to check the columns
+    for(int col = 0 ; col < N*N ; col++)
+    {
+        if(!col_ok(mat,col))
+           {
+               cout <<"0\n";
+               return EXIT_SUCCESS;
+           }
+    }
+    //to check to NxN squares.
+    for(int row = 0 ; row < N*N ; row += 3)
+    {
+        for(int col = 0 ; col < N*N ; col += 3)
+        {
+            if(!square_ok(mat, row, col))
+            {
+                cout << "0\n";
+                return EXIT_SUCCESS;
+            }
+
+        }
+    }
+    cout <<"1\n";
+    return EXIT_SUCCESS;
+}
+//---Functions Section--------
+//get values into the array
+void insert_to_array(int mat[][N*N])
+{
+   // int row,col; // indexes for the loop
+
+    for(int row = 0 ; row < N*N ; row++)
+    {
+        for(int col = 0 ; col <N*N ; col++)
+        {
+            cin >> mat[row][col];
+            if(mat[row][col] <0 || mat[row][col] >9 )
+                col--;
+        }
+    }
+
+}
+
+//---Functions----------------
+//checking the rows, if every value occur only once.
+bool row_ok(const int rows[])
+{
+    for (int i = 0 ; i < N*N ; i++)
+    {
+        for(int k = 0 ; k < N*N ; k++)
+        {
+            if(i==k)
+            continue;
+        if(rows[i] == rows[k])
+            return false;
+        }
+    }
+    return true;
+}
+//----------------------------
+//checking the columns, if every value occur only once.
+bool col_ok(const int cols[][N*N],const int col)
+{
+
+         for(int i = 0 ; i < N*N ; i++)
+        {
+            if(cols[i][col] == 0)
+               continue;
+            for(int k = 0 ; k <N*N ; k++)
+            {
+                if(i==k)
+                continue;
+            if(cols[i][col] == cols[k][col])
+            return false;
+        }
+    }
+    return true;
+}
+//----------------------------
+//checking the squares, if every value occur only once.
+bool square_ok(const int square[][N*N] ,  int row,  int col)
+{
+    row = (row/N)*N;
+    col = (col/N)*N;
+
+    for(int i = row ; i < row+N ; i++)
+    {
+       for(int k = col ; k< col+N ; k++)
+       {
+         if(square[i][k]==0)
+         continue;
+
+         for(int to_row = row ; to_row <row+N; to_row++)
+         {
+             for(int to_col = col ; to_col < col+N ; to_col++)
+             {
+                if(i == to_row && k == to_col)
+                    continue;
+                if(square[i][k] == square[to_row][to_col])
+                return false;
+             }
+         }
+
+       }
+    }
+    return true;
+}
+//----------------------------
+
